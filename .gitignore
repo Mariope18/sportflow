@@ -1,0 +1,34 @@
+# Target compilation folder (Maven)
+target/
+*.class
+
+# IntelliJ IDEA settings
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# Eclipse settings
+.metadata/
+.classpath
+.project
+.settings/
+bin/
+
+# VS Code settings
+.vscode/
+
+# Logs
+*.log
+logs/
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Docker
+.docker/
+
+# Environment configurations (credentials, keys)
+.env
