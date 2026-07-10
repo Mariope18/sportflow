@@ -1,0 +1,27 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: booking-service
+
+  # Connessione al Database PostgreSQL che avvieremo con Docker
+  datasource:
+    url: jdbc:postgresql://localhost:5432/sportflow_booking
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  # Configurazione JPA / Hibernate
+  jpa:
+    hibernate:
+      ddl-auto: validate # Valida lo schema ma non lo modifica (lascia il controllo a Flyway)
+    show-sql: true # Logga le query SQL nel terminale
+    properties:
+      hibernate:
+        format_sql: true # Formatta le query per renderle leggibili
+
+  # Configurazione Flyway per le migrazioni del database
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
