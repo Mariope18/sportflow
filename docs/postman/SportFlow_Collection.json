@@ -1,0 +1,132 @@
+{
+  "info": {
+    "name": "SportFlow API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Players",
+      "item": [
+        {
+          "name": "Create Player",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.id) {",
+                  "    pm.environment.set(\"playerId\", jsonData.id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Mario\",\n  \"surname\": \"Rossi\",\n  \"username\": \"mariorossi88\",\n  \"email\": \"mario.rossi@email.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/players",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "players"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Courts",
+      "item": [
+        {
+          "name": "Create Court",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.id) {",
+                  "    pm.environment.set(\"courtId\", jsonData.id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Campo Centrale Padel\",\n  \"sport\": \"PADEL\",\n  \"hourlyRate\": 40.00,\n  \"address\": {\n    \"street\": \"Via dello Sport, 1\",\n    \"zipCode\": \"00100\",\n    \"city\": \"Roma\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/courts",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "courts"]
+            }
+          }
+        },
+        {
+          "name": "Get Available Slots",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/courts/{{courtId}}/available-slots?date=2026-07-20",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "courts", "{{courtId}}", "available-slots"],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "2026-07-20"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Bookings",
+      "item": [
+        {
+          "name": "Create Booking",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"courtId\": \"{{courtId}}\",\n  \"playerId\": \"{{playerId}}\",\n  \"date\": \"2026-07-20\",\n  \"startTime\": \"10:00:00\",\n  \"endTime\": \"11:00:00\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/bookings",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "bookings"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

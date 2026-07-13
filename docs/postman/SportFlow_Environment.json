@@ -1,0 +1,23 @@
+{
+  "name": "SportFlow Local Environment",
+  "values": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8081",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "playerId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "courtId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    }
+  ]
+}
