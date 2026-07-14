@@ -38,7 +38,7 @@ public class BookingService {
         List<Booking> confirmedBooking =
                 bookingRepository.findAllByCourtIdAndDateAndStatus(courtId, date, BookingStatus.CONFIRMED);
 
-        List<LocalTime> generatedSlots = this.getGeneratedSlots();
+        List<LocalTime> generatedSlots = this.getGeneratedSlots(courtResponseDto);
 
         Set<LocalTime> confirmedSlots = confirmedBooking.stream().map(Booking::getStartTime)
                 .collect(Collectors.toSet());
@@ -51,15 +51,16 @@ public class BookingService {
         return new AvailableSlotDto(courtResponseDto, date, availableSlots);
     }
 
-    private List<LocalTime> getGeneratedSlots() {
+    private List<LocalTime> getGeneratedSlots(CourtResponseDto court) {
 
-        LocalTime orarioApertura = LocalTime.of(9, 0);
-        LocalTime orarioChiusura = LocalTime.of(22, 0);
+        LocalTime orarioApertura = court.openingTime();
+        LocalTime orarioChiusura = court.closingTime();
+        Integer durataSlot = court.slotDurationMinutes();
 
         return Stream.iterate(
                 orarioApertura,
-                t -> !t.isAfter(orarioChiusura),
-                t -> t.plusHours(1)
+                t -> !t.plusMinutes(durataSlot).isAfter(orarioChiusura),
+                t -> t.plusMinutes(durataSlot)
         ).toList();
     }
 
