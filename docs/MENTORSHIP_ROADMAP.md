@@ -46,8 +46,13 @@ graph LR
 
 ### I nostri Branch:
 1. **`main`**: Il branch principale. Contiene solo il codice stabile e "rilasciato". Non si committa mai direttamente su `main` (tranne il commit iniziale).
-2. **`develop`**: Il branch di sviluppo attivo per lo Sprint corrente.
-3. **`feature/nome-task`**, **`chore/nome-task`**, **`bugfix/nome-task`**: Branch temporanei per i singoli compiti.
+2. **`develop`**: Il branch di sviluppo attivo per lo Sprint corrente. Non si committa mai direttamente su `develop`.
+3. **`feat/SPORT-X-descrizione`**, **`chore/SPORT-X-descrizione`**, **`bugfix/SPORT-X-descrizione`**: Branch temporanei, uno per ogni Issue del backlog (es. `feat/SPORT-5-repositories-services`).
+
+### Regole Operative:
+- Ogni **Issue** (es. SPORT-5, SPORT-6) ha il proprio branch creato da `develop`.
+- Il merge del feature branch in `develop` avviene **da terminale** dopo la Code Review in chat (non tramite Pull Request, dato che siamo un singolo sviluppatore con review integrata).
+- A **fine Sprint**, `develop` viene mergiato in `main` come rilascio stabile.
 
 ---
 
