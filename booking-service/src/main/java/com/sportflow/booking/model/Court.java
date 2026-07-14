@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,6 +31,12 @@ public class Court {
 
     @Embedded
     private Address address;
+
+    private LocalTime openingTime;
+
+    private LocalTime closingTime;
+
+    private Integer slotDurationMinutes;
 
     @OneToMany(mappedBy = "court")
     private List<Booking> bookings;
