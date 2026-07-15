@@ -1,6 +1,7 @@
 package com.sportflow.booking.exception;
 
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -25,5 +26,12 @@ public class GlobalExceptionHandler {
                 HttpStatus.BAD_REQUEST,
                 ex.getMessage()
         );
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ProblemDetail handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, "Questo slot è appena stato prenotato da un altro utente. Riprova!");
+        problemDetail.setTitle("Conflict");
+        return problemDetail;
     }
 }
