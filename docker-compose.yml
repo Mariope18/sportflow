@@ -1,17 +1,32 @@
 version: '3.8'
 
 services:
-  postgres-db:
-    image: postgres:16-alpine # Versione stabile e leggera di PostgreSQL
-    container_name: sportflow-db
+  # --- DATABASE DEL BOOKING SERVICE ---
+  postgres-booking:
+    image: postgres:16-alpine
+    container_name: sportflow-booking-db
     environment:
-      - POSTGRES_DB=sportflow_booking      # Nome del database (deve corrispondere al pom/yml)
-      - POSTGRES_USER=postgres            # Utente amministratore
-      - POSTGRES_PASSWORD=postgres        # Password (coerente con il tuo application.yaml)
+      - POSTGRES_DB=sportflow_booking
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
     ports:
-      - "5432:5432"                       # Mappa la porta interna del container sulla porta del tuo PC
+      - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data   # Persistenza dati: evita di perdere il DB quando spegni Docker
+      - pgdata-booking:/var/lib/postgresql/data
+
+  # --- DATABASE DELL'AUTH SERVICE ---
+  postgres-auth:
+    image: postgres:16-alpine
+    container_name: sportflow-auth-db
+    environment:
+      - POSTGRES_DB=sportflow_auth
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata-auth:/var/lib/postgresql/data
 
 volumes:
-  pgdata: # Dichiariamo il volume per salvare i dati su disco
+  pgdata-booking:
+  pgdata-auth:

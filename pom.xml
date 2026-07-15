@@ -29,6 +29,7 @@
     <!-- Dichiariamo i sottomoduli -->
     <modules>
         <module>booking-service</module>
+        <module>auth-service</module>
     </modules>
 
 </project>
